@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var raio = prompt("Informe o raio: ");
+        var raioNumber = Number(raio);
+        var pi = Math.PI;
+        if (!isNaN(raioNumber) && raioNumber > 0) {
+
+            var comprimento = 2 * pi * raioNumber;
+            var area = 4 * pi * Math.pow(raioNumber, 2);
+            var volume = (4.0 / 3.0) * pi * Math.pow(raio, 3);
+            document.body.innerHTML += `<p>O comprimento da esfera é: ${comprimento.toFixed(2)}.</p>`;
+            document.body.innerHTML += `<p>A área da superfície da esfera é: ${area.toFixed(2)}.</p>`;
+            document.body.innerHTML += `<p>O volume da esfera é: ${volume.toFixed(2)}.</p>`;
+        } else {
+            document.body.innerHTML += `<p>Por favor, informe um valor válido para o raio.</p>`;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ano</title>
+</head>
+
+<body>
+    <script>
+        var ano = prompt("Informe seu ano de nascimento: ");
+        var anoNumber = Number(ano);
+        
+        if (!isNaN(anoNumber) && anoNumber > 0) {
+            var idadeAtual = 2024 - anoNumber;
+            var idade20anos = idadeAtual + 20; 
+            document.body.innerHTML += `<p>Sua idade atual é: ${idadeAtual} anos.</p>`;
+            document.body.innerHTML += `<p>Em 20 anos, você terá: ${idade20anos} anos.</p>`;
+        } else {
+            document.body.innerHTML += `<p>Por favor, informe um ano de nascimento válido.</p>`;
+        }
+
+    </script>
+</body>
+
+</html>

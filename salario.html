@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var salario = prompt("Informe o seu salário: ");
+        var salarioNumber = Number(salario);
+
+        if (!isNaN(salarioNumber) && salarioNumber > 0) {
+            var aumento = salarioNumber * 0.25;
+            document.body.innerHTML += `<p>Seu salário atual é ${salarioNumber} reais.</p>`;
+            document.body.innerHTML += `<p>Seu salário com aumento é ${salarioNumber + aumento} reais.</p>`;
+        } else {
+            document.body.innerHTML += `<p>Por favor, informe um valor válido.</p>`;
+        }
+    </script>
+</body>
+</html>

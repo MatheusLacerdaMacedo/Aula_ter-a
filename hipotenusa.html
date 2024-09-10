@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var catetoA = prompt("Informe o valor do primeiro cateto (a): ");
+        var catetoB = prompt("Informe o valor do segundo cateto (b): ");
+
+        var catetoANum = Number(catetoA);
+        var catetoBNum = Number(catetoB);
+
+        if (!isNaN(catetoANum) && catetoANum > 0 && !isNaN(catetoBNum) && catetoBNum > 0){
+            var hipotenusa = Math.sqrt(Math.pow(catetoANum, 2) + Math.pow(catetoBNum, 2));
+            document.body.innerHTML += `<p>O valor da hipotenusa é: ${hipotenusa.toFixed(2)}</p>`;
+        } else {
+            document.body.innerHTML += `<p>Por favor, informe valores válidos para os catetos.</p>`;
+        }
+    </script>
+</body>
+</html>
