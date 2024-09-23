@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Registro</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .register-form {
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="register-form">
+    <h2 class="text-center">Registrar</h2>
+    <form id="registerForm">
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" id="name" placeholder="Digite seu nome" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Digite seu email" required>
+        </div>
+        <div class="form-group">
+            <label for="dob">Data de Nascimento</label>
+            <input type="date" class="form-control" id="dob" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" class="form-control" id="password" placeholder="Digite sua senha" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirmar Senha</label>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirme sua senha" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+    </form>
+    <p class="text-center mt-2"><a href="login.html">Já tem uma conta? Faça login</a></p>
+    <div id="feedback" class="text-danger text-center"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita o envio do formulário
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const dob = document.getElementById('dob').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        const feedback = document.getElementById('feedback');
+
+        // Validação simples
+        if (password !== confirmPassword) {
+            feedback.innerText = 'As senhas não coincidem.';
+            return;
+        }
+
+        // Aqui você pode adicionar lógica para armazenar os dados do usuário
+        // (por exemplo, localStorage ou uma chamada de API)
+
+        alert('Registro bem-sucedido!');
+        window.location.href = 'login.html'; // Redireciona para a página de login
+    });
+</script>
+
+</body>
+</html>

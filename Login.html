@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .login-form {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-form">
+    <h2 class="text-center">Login</h2>
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Digite seu email" required>
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" class="form-control" id="senha" placeholder="Digite sua senha" required>
+        </div>
+        <a href="Curriculo.html"  class="btn btn-primary btn-block">Entrar</a>
+        <a href="register.html" class="btn btn-secondary btn-block">Registrar</a>
+    </form>
+    <p class="text-center mt-2"><a href="#">Esqueceu a senha?</a></p>
+    <div id="feedback" class="text-danger text-center"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evita o envio do formulário
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+
+        // Lógica de autenticação (exemplo simplificado)
+        if (email === "usuario@example.com" && senha === "senha123") {
+            alert('Login bem-sucedido!');
+            window.location.href = 'home.html'; // Redireciona para a página inicial
+        } else {
+            document.getElementById('feedback').innerText = 'Email ou senha incorretos. Tente novamente.';
+        }
+    });
+</script>
+
+</body>
+</html>

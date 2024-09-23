@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela Interativa</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function showMessage(studentName, noteType, noteValue) {
+            alert(`${studentName} - ${noteType}: ${noteValue}`);
+        }
+    </script>
+    <style>
+        /* Estilo para a linha ao passar o mouse */
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5; /* Cor de fundo ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Tabela Interativa</h2>
+        <table class="table table-borderless table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome do Aluno</th>
+                    <th scope="col">Nota P1</th>
+                    <th scope="col">Nota P2</th>
+                    <th scope="col">Nota T1</th>
+                    <th scope="col">Nota Total</th>
+                    <th scope="col">Faltas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Ana</td>
+                    <td onclick="showMessage('Ana', 'Nota P1', 26)">26</td>
+                    <td onclick="showMessage('Ana', 'Nota P2', 17)">17</td>
+                    <td onclick="showMessage('Ana', 'Nota T1', 27)">27</td>
+                    <td>73</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Gisele</td>
+                    <td onclick="showMessage('Gisele', 'Nota P1', 28)">28</td>
+                    <td onclick="showMessage('Gisele', 'Nota P2', 18)">18</td>
+                    <td onclick="showMessage('Gisele', 'Nota T1', 15)">15</td>
+                    <td>70</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Matheus</td>
+                    <td onclick="showMessage('Matheus', 'Nota P1', 22)">22</td>
+                    <td onclick="showMessage('Matheus', 'Nota P2', 18)">18</td>
+                    <td onclick="showMessage('Matheus', 'Nota T1', 15)">15</td>
+                    <td>70</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Jane</td>
+                    <td onclick="showMessage('Jane', 'Nota P1', 24)">24</td>
+                    <td onclick="showMessage('Jane', 'Nota P2', 18)">18</td>
+                    <td onclick="showMessage('Jane', 'Nota T1', 15)">15</td>
+                    <td>74</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Jorge</td>
+                    <td onclick="showMessage('Jorge', 'Nota P1', 25)">25</td>
+                    <td onclick="showMessage('Jorge', 'Nota P2', 18)">18</td>
+                    <td onclick="showMessage('Jorge', 'Nota T1', 15)">15</td>
+                    <td>73</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <td>Média</td>
+                    <td colspan="3">Média: 70,8</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
