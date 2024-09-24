@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Folha de Pagamento</title>
+</head>
+
+<script>
+    const funcionarios = [
+        { id: 1, nome: "Ana", ValorDaHora: 45.78 },
+        { id: 2, nome: "Matheus", ValorDaHora: 52.3 },
+        { id: 3, nome: "Bruna", ValorDaHora: 67.2 },
+        { id: 4, nome: "Marcos", ValorDaHora: 25.2 },
+        { id: 5, nome: "Pedro", ValorDaHora: 34.3 }
+    ];
+
+    function exibirFuncinario() {
+        const id = parseInt(document.getElementById("FuncionarioID").value);
+        const funcionario = funcionarios.find(f => f.id === id);
+        if (funcionario) {
+            alert(`Funcionario: ${funcionario.nome} - Valor por hora: R$ ${funcionario.ValorDaHora.toFixed(2)}`);
+        } else {
+            alert('Funcionário não encontrado!');
+        }
+    }
+</script>
+
+<style>
+    .table-hover tbody tr:hover {
+        background-color: #f5f5f5; 
+    }
+</style>
+
+<body>
+    <div class="container mt-5">
+        <h2>Folha de Pagamento</h2>
+        <div class="form-group">
+            <label for="FuncionarioID">Informe o ID do Funcionário:</label>
+            <input type="number" id="FuncionarioID" class="form-control" placeholder="Digite o ID">
+        </div>
+       
+        <button class="btn btn-primary" onclick="exibirFuncinario()">Buscar Funcionário</button>
+    </div>
+</body>
+
+</html>

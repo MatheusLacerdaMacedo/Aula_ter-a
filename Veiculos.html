@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Veículos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastro de Veículos</h1>
+    <div>
+        <label for="chassi">Número do Chassi:</label>
+        <input type="text" id="chassi" required>
+        <br>
+        <label for="placa">Placa:</label>
+        <input type="text" id="placa" required>
+        <br>
+        <button onclick="cadastrarVeiculo()">Cadastrar Veículo</button>
+    </div>
+
+    <h2>Veículos Cadastrados:</h2>
+    <ul id="listaVeiculos"></ul>
+
+    <script>
+        class Veiculo {
+            constructor(chassi, placa) {
+                this._chassi = chassi;
+                this._placa = placa;
+            }
+
+            get chassi() {
+                return this._chassi;
+            }
+
+            get placa() {
+                return this._placa;
+            }
+        }
+
+        const veiculos = [];
+
+        function cadastrarVeiculo() {
+            const chassiInput = document.getElementById('chassi');
+            const placaInput = document.getElementById('placa');
+            const chassi = chassiInput.value;
+            const placa = placaInput.value;
+
+            const veiculo = new Veiculo(chassi, placa);
+            veiculos.push(veiculo);
+
+            
+            atualizarListaVeiculos();
+
+            
+            chassiInput.value = '';
+            placaInput.value = '';
+        }
+
+        function atualizarListaVeiculos() {
+            const listaVeiculos = document.getElementById('listaVeiculos');
+            listaVeiculos.innerHTML = ''; 
+
+            veiculos.forEach(veiculo => {
+                const li = document.createElement('li');
+                li.textContent = `Chassi: ${veiculo.chassi}, Placa: ${veiculo.placa}`;
+                listaVeiculos.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>

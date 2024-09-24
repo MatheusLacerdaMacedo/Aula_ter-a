@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Registro</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        .register-form {
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="register-form">
+        <h2 class="text-center">Registrar</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="name">Login</label>
+                <input type="text" class="form-control" id="name" placeholder="Digite seu nome" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Digite seu email" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Data de Nascimento</label>
+                <input type="date" class="form-control" id="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" class="form-control" id="password" placeholder="Digite sua senha" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirmar Senha</label>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirme sua senha" required>
+            </div>
+            <div class="form-group">
+                <label for="sexo">Sexo</label>
+                <select id="sexo" name="sexo" class="form-control" required>
+                    <option value="">Selecione</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Outro">Outro</option>
+                    <option value="Prefiro não informar">Prefiro não informar</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="city">Cidade</label>
+                <input type="text" class="form-control" id="city" placeholder="Cidade" required>
+            </div>
+            <div class="form-group">
+                <label for="home">Home-page</label>
+                <input type="url" class="form-control" id="home" placeholder="Home Page" required>
+            </div>
+            <div class="form-group">
+                <label>Interesses</label><br>
+                <label>
+                    <input type="checkbox" name="interesse" value="Tecnologia">
+                    Tecnologia
+                </label><br>
+                <label>
+                    <input type="checkbox" name="interesse" value="Esportes">
+                    Esportes
+                </label><br>
+                <label>
+                    <input type="checkbox" name="interesse" value="Música">
+                    Música
+                </label><br>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+            <button type="reset" class="btn btn-secondary btn-block">Limpar</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
