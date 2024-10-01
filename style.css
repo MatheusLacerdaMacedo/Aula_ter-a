@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.form {
+    max-width: 500px; 
+    margin: 20px auto; 
+    padding: 20px;
+    border: 1px solid #ddd; 
+    border-radius: 10px;
+    background-color: #f9f9f9; 
+}
+
+.form select,
+.form input {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box; 
+    margin-bottom: 15px; 
+}
+
+.form button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff; 
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+}
+
+.form button:hover {
+    background-color: #0056b3; /* Cor do botão ao passar o mouse */
+}
+
+.notify {
+    display: none;
+    background-color: #dff0d8; /* Light green background */
+    color: #3c763d; /* Dark green text */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px; /* Espaçamento abaixo da notificação */
+}
+
+.notify.show {
+    display: block; /* Mostrar notificação */
+}
+
+.table {
+    width: 100%; /* Largura total */
+    margin-top: 20px; /* Espaçamento superior */
+    border-collapse: collapse; /* Para remover espaços entre as células */
+}
+
+.table table {
+    width: 100%;
+    border: 1px solid #ddd; 
+}
+
+.table table th,
+.table table td {
+    padding: 10px; 
+    border: 1px solid #ddd; 
+    text-align: left; /* Alinhamento do texto à esquerda */
+}
+
+.table table th {
+    background-color: #f2f2f2; /* Cor de fundo do cabeçalho */
+}
+
+.table table td button {
+    background-color: #28a745; 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 5px 10px; 
+    cursor: pointer; 
+}
+
+.table table td button:hover {
+    opacity: 0.8; 
+}
+
+.del_btn {
+    background-color: #dc3545; 
+}
+
+.up_btn {
+    background-color: #007bff; 
+}
+
+#notify {
+    display: none; 
+}
+
+.update_data {
+    display: none; 
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none; 
+}
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.actions button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff; 
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+}
+
+.actions button:hover {
+    background-color: #0056b3; /* Cor do botão ao passar o mouse */
+}

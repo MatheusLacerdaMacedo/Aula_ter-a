@@ -1,97 +1,160 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de Registro</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f8f9fa;
-        }
-
-        .register-form {
-            width: 400px;
-            padding: 20px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            background-color: #ffffff;
-        }
-    </style>
+    <title>Forms</title>
 </head>
 
 <body>
+    <div id="notify" class="notify"></div>
+    <div class="form">
+        <input type="text" id="name" placeholder="Coloque o nome" autocomplete="off" required>
+        <input type="email" id="email" placeholder="Digite o email" autocomplete="off" required>
+        <input type="text" id="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="000.000.000-00" required>
+        <input type="date" id="date" required>
+        
+        <label for="sex">Sexo:</label>
+        <select id="sex" required>
+            <option value="" disabled selected>Selecione o sexo</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+            <option value="Outro">Outro</option>
+            <option value="prefiro nao informar">Prefiro não informar</option>
+        </select>
 
-    <div class="register-form">
-        <h2 class="text-center">Registrar</h2>
-        <form id="registerForm">
-            <div class="form-group">
-                <label for="name">Login</label>
-                <input type="text" class="form-control" id="name" placeholder="Digite seu nome" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Digite seu email" required>
-            </div>
-            <div class="form-group">
-                <label for="dob">Data de Nascimento</label>
-                <input type="date" class="form-control" id="dob" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Senha</label>
-                <input type="password" class="form-control" id="password" placeholder="Digite sua senha" required>
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">Confirmar Senha</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirme sua senha" required>
-            </div>
-            <div class="form-group">
-                <label for="sexo">Sexo</label>
-                <select id="sexo" name="sexo" class="form-control" required>
-                    <option value="">Selecione</option>
-                    <option value="Feminino">Feminino</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Outro">Outro</option>
-                    <option value="Prefiro não informar">Prefiro não informar</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="city">Cidade</label>
-                <input type="text" class="form-control" id="city" placeholder="Cidade" required>
-            </div>
-            <div class="form-group">
-                <label for="home">Home-page</label>
-                <input type="url" class="form-control" id="home" placeholder="Home Page" required>
-            </div>
-            <div class="form-group">
-                <label>Interesses</label><br>
-                <label>
-                    <input type="checkbox" name="interesse" value="Tecnologia">
-                    Tecnologia
-                </label><br>
-                <label>
-                    <input type="checkbox" name="interesse" value="Esportes">
-                    Esportes
-                </label><br>
-                <label>
-                    <input type="checkbox" name="interesse" value="Música">
-                    Música
-                </label><br>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
-            <button type="reset" class="btn btn-secondary btn-block">Limpar</button>
-        </form>
+        <button id="add_Data" class="add_Data" onclick="addData()">Cadastrar</button>
+        <button id="update_data" class="update_data hide">Atualizar</button>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>CPF</th>
+                    <th>Data de Nascimento</th>
+                    <th>Sexo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <!-- Usuários serão armazenados aqui -->
+            </tbody>
+        </table>
+    </div>
 
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+        import { getFirestore, collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js';
+
+        // Inicializa o Firebase
+        const firebaseConfig = {
+            // Sua configuração do Firebase
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function addData() {
+            const name = document.querySelector('#name').value;
+            const email = document.querySelector('#email').value;
+            const cpf = document.querySelector('#cpf').value;
+            const date = document.querySelector('#date').value;
+            const sex = document.querySelector('#sex').value;
+            const notify = document.getElementById('notify');
+
+            if (!name || !email || !cpf || !date || !sex) {
+                notify.innerHTML = "Todos os campos são obrigatórios.";
+                notify.classList.add('show');
+                setTimeout(() => { notify.classList.remove('show'); }, 3000);
+                return;
+            }
+
+            try {
+                const counterDocRef = doc(db, "counters", "userIdCounter");
+                const counterDoc = await getDoc(counterDocRef);
+
+                let newId = 1; // Valor padrão caso o documento não exista
+                if (counterDoc.exists()) {
+                    newId = counterDoc.data().currentId + 1; // Incrementa o ID
+                }
+
+                // Adiciona o novo usuário com o ID
+                await addDoc(collection(db, "users"), { id: newId, name, email, cpf, date, sex });
+
+                // Atualiza o contador
+                await updateDoc(counterDocRef, { currentId: newId });
+
+                addRowToTable(newId, name, email, cpf, date, sex);
+
+                notify.innerHTML = "Dados adicionados com sucesso.";
+                notify.classList.add('show');
+                clearForm();
+                setTimeout(() => { notify.classList.remove('show'); }, 3000);
+            } catch (error) {
+                console.error(error);
+                notify.innerHTML = "Erro ao adicionar dados.";
+                notify.classList.add('show');
+                setTimeout(() => { notify.classList.remove('show'); }, 3000);
+            }
+        }
+
+        function addRowToTable(id, name, email, cpf, date, sex) {
+            const tableBody = document.getElementById('userTableBody');
+            const row = document.createElement('tr');
+            row.setAttribute('data-id', id);
+            row.innerHTML = `
+                <td>${id}</td>
+                <td>${name}</td>
+                <td>${email}</td>
+                <td>${cpf}</td>
+                <td>${date}</td>
+                <td>${sex}</td>
+                <td>
+                    <button onclick="confirmarRemocao('${id}')" class="del_btn">Remover</button>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        }
+
+        function confirmarRemocao(id) {
+            const confirmar = confirm("Você realmente deseja remover este item?");
+            if (confirmar) {
+                const linha = document.querySelector(`tr[data-id='${id}']`);
+                if (linha) {
+                    linha.remove();
+                    alert("Item removido com sucesso!");
+                } else {
+                    alert("Item não encontrado.");
+                }
+            } else {
+                alert("Remoção cancelada.");
+            }
+        }
+
+        function clearForm() {
+            document.querySelector('#name').value = "";
+            document.querySelector('#email').value = "";
+            document.querySelector('#cpf').value = "";
+            document.querySelector('#date').value = "";
+            document.querySelector('#sex').value = "";
+        }
+
+        // Carregar dados existentes
+        async function loadData() {
+            const querySnapshot = await getDocs(collection(db, "users"));
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                addRowToTable(data.id, data.name, data.email, data.cpf, data.date, data.sex);
+            });
+        }
+
+        loadData();
+    </script>
+    <script type="module" src="script.js"></script>
 </body>
-
 </html>

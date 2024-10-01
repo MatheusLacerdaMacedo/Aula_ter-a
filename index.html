@@ -1,12 +1,93 @@
-<!doctype html><html lang="pt-br"><head>
-    <!-- Meta tags obrigatórias: -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Bootstrap CSS: -->
-    <link rel="stylesheet" href="bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css">
-    <title>Olá, mundo!</title>
-    </head><body>
-    <!-- Área para o conteúdo da página. -->
-    <h1>Olá, Mundo!</h1>
-    <!-- Bootstrap JS: -->
-    <script src="bootstrap-5.3.0-alpha3-dist/js/bootstrap.bundle.min.js"></script>
-    </body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuários</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="notify"></div>
+    <div class="form">
+        <input type="text" id="name" placeholder="Coloque o nome" autocomplete="off">
+        <input type="email" id="email" placeholder="Digite o email" autocomplete="off">
+        <button id="add_Data" class="add_Data">Cadastrar</button>
+        <button id="update_data" class="update_data hide">Atualizar</button>
+    </div>
+
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <!-- Linhas de usuários serão populadas dinamicamente aqui -->
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        async function addData() {
+            const name = document.querySelector('#name').value;
+            const email = document.querySelector('#email').value;
+
+            if (!name || !email) {
+                notify.innerHTML = "Nome e email não podem estar vazios.";
+                setTimeout(() => { notify.innerHTML = ""; }, 3000);
+                return;
+            }
+
+            try {
+                const docRef = await addDoc(collection(db, "users"), { name, email });
+                addRowToTable(docRef.id, name, email);
+                
+                notify.innerHTML = "Dados adicionados";
+                document.querySelector('#name').value = "";
+                document.querySelector('#email').value = "";
+                setTimeout(() => { notify.innerHTML = ""; }, 3000);
+            } catch (error) {
+                console.log(error);
+                notify.innerHTML = "Erro ao adicionar dados.";
+                setTimeout(() => { notify.innerHTML = ""; }, 3000);
+            }
+        }
+
+        function addRowToTable(id, name, email) {
+            const tableBody = document.getElementById('userTableBody');
+            const row = document.createElement('tr');
+            row.setAttribute('data-id', id);
+            row.innerHTML = `
+                <td>${id}</td>
+                <td>${name}</td>
+                <td>${email}</td>
+                <td>
+                    <button onclick="confirmarRemocao('${id}')">Remover</button>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        }
+
+        function confirmarRemocao(id) {
+            const confirmar = confirm("Você realmente deseja remover este item?");
+            if (confirmar) {
+                const linha = document.querySelector(`tr[data-id='${id}']`);
+                if (linha) {
+                    linha.remove();
+                    alert("Item removido com sucesso!");
+                } else {
+                    alert("Item não encontrado.");
+                }
+            } else {
+                alert("Remoção cancelada.");
+            }
+        }
+    </script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
