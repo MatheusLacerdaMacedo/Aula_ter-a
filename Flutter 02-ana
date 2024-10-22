@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(
+  MaterialApp(
+    home: Home(),
+    debugShowCheckedModeBanner: false,
+  ),
+);
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: const Icon(Icons.home),
+        title: const Text('Página Inicial'),
+      ),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 400,
+              width: 300, // Ajuste a largura conforme necessário
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(7),
+                child: Image.network(
+                  'https://static-cse.canva.com/blob/759728/ComoTirareEditarSuaFotoparaPerfilemRedesSociaisfeaturedimagee1559023010630.994bef93.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            const SizedBox(width: 10), // Espaço entre as imagens
+            Container(
+              height: 400,
+              width: 300, // Ajuste a largura conforme necessário
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(7),
+                child: Image.network(
+                  'https://images.pexels.com/photos/1666779/pexels-photo-1666779.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', // Substitua pela URL da segunda imagem
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: const FloatingActionButton(
+        onPressed: null,
+        tooltip: "Exemplo de botão",
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
