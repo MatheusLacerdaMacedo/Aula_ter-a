@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+void main() => runApp(MaterialApp(home: Home()));
+
+class Home extends StatefulWidget {
+  @override
+  HomeState createState() {
+    return HomeState();
+  }
+}
+
+class HomeState extends State<Home> {
+  TextEditingController idadeController = TextEditingController();
+  String message = '';
+
+  void _submit() {
+    final String input = idadeController.text;
+    if (input.isEmpty || int.tryParse(input) == null || int.parse(input) < 0) {
+      setState(() {
+        message = 'Por favor, insira uma idade válida.';
+      });
+    } else {
+      setState(() {
+        message = 'Sua idade é $input anos.';
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Página Inicial'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            const Text('Informe sua idade:'),
+            TextField(
+              controller: idadeController,
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly,
+              ],
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  onPressed: () => idadeController.clear(),
+                  icon: const Icon(Icons.clear),
+                ),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
+                labelText: 'Idade',
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _submit,
+              child: const Text('Enviar'),
+            ),
+            const SizedBox(height: 20),
+            Text(message),
+          ],
+        ),
+      ),
+    );
+  }
+}

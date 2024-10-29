@@ -1,0 +1,101 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Calculadora de IMC',
+      home: IMCCalculator(),
+    );
+  }
+}
+
+class IMCCalculator extends StatefulWidget {
+  @override
+  _IMCCalculatorState createState() => _IMCCalculatorState();
+}
+
+class _IMCCalculatorState extends State<IMCCalculator> {
+  final TextEditingController _pesoController = TextEditingController();
+  final TextEditingController _alturaController = TextEditingController();
+  String _resultado = '';
+
+  void _calcularIMC() {
+    final double? peso = double.tryParse(_pesoController.text);
+    final double? altura = double.tryParse(_alturaController.text);
+
+    if (peso != null && altura != null && altura > 0) {
+      final double imc = peso / (altura * altura);
+      String classificacao = '';
+
+    if (imc < 16) {
+    classificacao = 'Magreza grave';
+} else if (imc >= 16 && imc < 17) {
+    classificacao = 'Magreza moderada';
+} else if (imc >= 17 && imc < 18.5) {
+    classificacao = 'Magreza leve';
+} else if (imc >= 18.5 && imc < 25) {
+    classificacao = 'Saudável';
+} else if (imc >= 25 && imc < 30) {
+    classificacao = 'Sobrepeso';
+} else if (imc >= 30 && imc < 35) {
+    classificacao = 'Obesidade grau I';
+} else if (imc >= 35 && imc < 40) {
+    classificacao = 'Obesidade grau II (severa)';
+} else {
+    classificacao = 'Obesidade grau III (mórbida)';
+}
+
+
+      setState(() {
+        _resultado = 'IMC: ${imc.toStringAsFixed(2)}\nClassificação: $classificacao';
+      });
+    } else {
+      setState(() {
+        _resultado = 'Por favor, insira valores válidos.';
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Calculadora de IMC'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _pesoController,
+              decoration: InputDecoration(labelText: 'Peso (kg)'),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: _alturaController,
+              decoration: InputDecoration(labelText: 'Altura (m)'),
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _calcularIMC,
+              child: Text('Calcular IMC'),
+            ),
+            SizedBox(height: 20),
+            Text(
+              _resultado,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

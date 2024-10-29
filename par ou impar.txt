@@ -1,0 +1,74 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: Home()));
+
+class Home extends StatefulWidget {
+  @override
+  HomeState createState() {
+    return HomeState();
+  }
+}
+
+class HomeState extends State<Home> {
+  int numeroVezes = 0;
+  String resultado = '';
+
+  void cliqueDoBotao() {
+    numeroVezes++;
+  }
+
+  void verificarParImpar(int numero) {
+    if (numero % 2 == 0) {
+      setState(() {
+        resultado = "O número $numero é par.";
+      });
+    } else {
+      setState(() {
+        resultado = "O número $numero é ímpar.";
+      });
+    }
+  }
+
+  void mostrarResultado() {
+    // Aqui você pode passar um número para verificar
+    verificarParImpar(numeroVezes);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Página Inicial"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Número de vezes em que o botão foi pressionado: $numeroVezes.",
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: 20),
+            Text(
+              resultado,
+              style: TextStyle(fontSize: 20, color: Colors.blue),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                mostrarResultado();
+              },
+              child: const Text("Verificar Par ou Ímpar"),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(cliqueDoBotao);
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}

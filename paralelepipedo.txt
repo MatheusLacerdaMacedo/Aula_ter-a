@@ -1,0 +1,80 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Calculadora de Volume',
+      home: VolumeCalculator(),
+    );
+  }
+}
+
+class VolumeCalculator extends StatefulWidget {
+  @override
+  _VolumeCalculatorState createState() => _VolumeCalculatorState();
+}
+
+class _VolumeCalculatorState extends State<VolumeCalculator> {
+  final TextEditingController lengthController = TextEditingController();
+  final TextEditingController widthController = TextEditingController();
+  final TextEditingController heightController = TextEditingController();
+  String volume = '';
+
+  void calculateVolume() {
+    double length = double.tryParse(lengthController.text) ?? 0;
+    double width = double.tryParse(widthController.text) ?? 0;
+    double height = double.tryParse(heightController.text) ?? 0;
+    double result = length * width * height;
+
+    setState(() {
+      volume = 'Volume: $result';
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Calculadora de Volume do Paralelepípedo'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: lengthController,
+              decoration: InputDecoration(labelText: 'Comprimento'),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: widthController,
+              decoration: InputDecoration(labelText: 'Largura'),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
+              controller: heightController,
+              decoration: InputDecoration(labelText: 'Altura'),
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: calculateVolume,
+              child: Text('Calcular Volume'),
+            ),
+            SizedBox(height: 20),
+            Text(
+              volume,
+              style: TextStyle(fontSize: 20),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

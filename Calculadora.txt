@@ -1,0 +1,127 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(CalculadoraApp());
+
+class CalculadoraApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: CalculadoraHome(),
+    );
+  }
+}
+
+class CalculadoraHome extends StatefulWidget {
+  @override
+  _CalculadoraHomeState createState() => _CalculadoraHomeState();
+}
+
+class _CalculadoraHomeState extends State<CalculadoraHome> {
+  final TextEditingController numero1Controller = TextEditingController();
+  final TextEditingController numero2Controller = TextEditingController();
+  String resultado = '';
+
+  void _calcular(String operacao) {
+    double? numero1 = double.tryParse(numero1Controller.text);
+    double? numero2 = double.tryParse(numero2Controller.text);
+
+    if (numero1 == null || numero2 == null) {
+      setState(() {
+        resultado = 'Por favor, insira números válidos.';
+      });
+      return;
+    }
+
+    double? res;
+
+    switch (operacao) {
+      case 'soma':
+        res = numero1 + numero2;
+        break;
+      case 'subtracao':
+        res = numero1 - numero2;
+        break;
+      case 'multiplicacao':
+        res = numero1 * numero2;
+        break;
+      case 'divisao':
+        if (numero2 == 0) {
+          setState(() {
+            resultado = 'Não é possível dividir por zero.';
+          });
+          return;
+        }
+        res = numero1 / numero2;
+        break;
+      default:
+        setState(() {
+          resultado = 'Operação inválida.';
+        });
+        return;
+    }
+
+    setState(() {
+      resultado = 'Resultado: $res';
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Calculadora'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: numero1Controller,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Número 1',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: numero2Controller,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Número 2',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () => _calcular('soma'),
+                  child: const Text('Somar'),
+                ),
+                ElevatedButton(
+                  onPressed: () => _calcular('subtracao'),
+                  child: const Text('Subtrair'),
+                ),
+                ElevatedButton(
+                  onPressed: () => _calcular('multiplicacao'),
+                  child: const Text('Multiplicar'),
+                ),
+                ElevatedButton(
+                  onPressed: () => _calcular('divisao'),
+                  child: const Text('Dividir'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Text(
+              resultado,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
